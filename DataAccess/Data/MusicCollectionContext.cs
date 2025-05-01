@@ -25,6 +25,34 @@ namespace MusicCollection.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Artist>().HasData(
+                new Artist
+                {
+                    Id = 1,
+                    Name = "Pink Floyd",
+                    Country = "United Kingdom",
+                    ActiveYears = "1965 - 2014",
+                    Biography = "An iconic progressive rock band known for albums like 'The Dark Side of the Moon'.",
+                }
+            );
+
+            modelBuilder.Entity<Album>().HasData(
+                new Album
+                {
+                    Id = 1,
+                    Title = "The Dark Side of the Moon",
+                    Genre = "Progressive Rock",
+                    ReleaseYear = 1973,
+                    TrackCount = 10,
+                    Label = "Harvest Records",
+                    Format = "Vinyl",
+                    ArtistId = 1
+                }
+            );
+
+
             // Налаштування many-to-many для Playlist–Track
             modelBuilder.Entity<PlaylistTrack>()
                 .HasKey(pt => new { pt.PlaylistId, pt.TrackId });
